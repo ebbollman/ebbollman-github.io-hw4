@@ -11,7 +11,7 @@
 
 
 
-<title>About Me</title>
+<title>Dashboard</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,9 +19,6 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -253,69 +250,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-
 
 </head>
 
@@ -323,16 +257,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -379,39 +303,77 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">About Me</h1>
+<h1 class="title toc-ignore">Dashboard</h1>
 
 </div>
 
 
-<p><img src="images/headshot.jpg" style="width:75%"></p>
-<p>I’m an emergency medicine physician and public health practitioner. Currently, I work as a Global Emergency Medicine Fellow for Columbia University, practicing in two emergency departments in Washington Heights and Inwood. I am also a Masters of Public Health candidate at the Columbia Mailman School of Public Health. Previous to this position in NYC, I completed my residency training in New Orleans at the only level-1 trauma center serving southern Louisiana.</p>
-<p>My current research focuses on improving emergency referral systems in rural Ghana along with colleagues within the Ghana Health Service and Columbia University. I additionally serve as a clinical mentor for the International Rescue Committee’s COVID-19 response.</p>
-<p>I speak professional Spanish and Haitian Creole, and am learning French. I enjoy hiking, biking, trail running, and (pre-pandemic) tango dancing.</p>
-<ul>
-<li><a href="https://www.linkedin.com/in/brennan-bollman-a451132a">LinkedIn</a></li>
-<li><a href="http://www.iemfellowships.com/programs/26">Global EM Fellowship</a></li>
-</ul>
-<div id="education" class="section level2">
-<h2>Education</h2>
-<ul>
-<li><p>Residency: Emergency Medicine - Louisiana State University Health Sciences Center, New Orleans, LA</p></li>
-<li><p>MD: Harvard Medical School</p></li>
-<li><p>B.S.: University of Notre Dame</p></li>
-</ul>
+<pre class="r"><code>api_url = &quot;https://data.cityofnewyork.us/resource/43nn-pn8j.csv&quot;
+
+rest_inspections = 
+  GET(api_url, query = list(&quot;$limit&quot; = 50000)) %&gt;% 
+  content(&quot;parsed&quot;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_character(),
+##   camis = col_double(),
+##   zipcode = col_double(),
+##   inspection_date = col_datetime(format = &quot;&quot;),
+##   score = col_double(),
+##   grade_date = col_datetime(format = &quot;&quot;),
+##   record_date = col_datetime(format = &quot;&quot;),
+##   latitude = col_double(),
+##   longitude = col_double(),
+##   community_board = col_double(),
+##   bin = col_double(),
+##   bbl = col_double()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<pre><code>## Warning: 5 parsing failures.
+##   row     col expected actual         file
+##  5267 zipcode a double    N/A &lt;raw vector&gt;
+##  7142 zipcode a double    N/A &lt;raw vector&gt;
+## 11002 zipcode a double    N/A &lt;raw vector&gt;
+## 26413 zipcode a double    N/A &lt;raw vector&gt;
+## 47279 zipcode a double    N/A &lt;raw vector&gt;</code></pre>
+<pre class="r"><code>rest_inspections</code></pre>
+<pre><code>## # A tibble: 50,000 x 26
+##     camis dba   boro  building street zipcode phone cuisine_descrip…
+##     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;           
+##  1 5.01e7 DO O… Broo… 1108     BEDFO…   11216 3474… American        
+##  2 5.01e7 SUBW… Manh… 2508     BROAD…   10025 2126… Sandwiches      
+##  3 4.15e7 RIVI… Quee… 1712     UTOPI…   11357 7183… Italian         
+##  4 5.01e7 MATT… Broo… 7604     3 AVE…   11209 7186… Café/Coffee/Tea 
+##  5 4.17e7 TROP… Broo… 584      ROCKA…   11212 7183… Latin (Cuban, D…
+##  6 4.13e7 JOHN… Quee… 60-39    FRESH…   11378 3474… Polish          
+##  7 4.07e7 NONI… Bronx 5921     RIVER…   10471 7186… American        
+##  8 4.04e7 SALA… Manh… 104      W. 13…   10011 2127… Middle Eastern  
+##  9 5.01e7 LUCK… Bronx 1151     EAST …   10460 3476… Chinese         
+## 10 4.09e7 BELL… Quee… 47-46    VERNO…   11101 7183… Italian         
+## # … with 49,990 more rows, and 18 more variables: inspection_date &lt;dttm&gt;,
+## #   action &lt;chr&gt;, violation_code &lt;chr&gt;, violation_description &lt;chr&gt;,
+## #   critical_flag &lt;chr&gt;, score &lt;dbl&gt;, grade &lt;chr&gt;, grade_date &lt;dttm&gt;,
+## #   record_date &lt;dttm&gt;, inspection_type &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,
+## #   community_board &lt;dbl&gt;, council_district &lt;chr&gt;, census_tract &lt;chr&gt;,
+## #   bin &lt;dbl&gt;, bbl &lt;dbl&gt;, nta &lt;chr&gt;</code></pre>
+<div id="column" class="section level2" data-width="650">
+<h2>Column</h2>
+<div id="chart-a" class="section level3">
+<h3>Chart A</h3>
 </div>
-<div id="curriculum-vitae" class="section level2">
-<h2><a href="https://drive.google.com/file/d/1gzSiKz_tLeIQzCyRr0t0-0fnuCtZlAsR/view?usp=sharing">Curriculum Vitae</a></h2>
 </div>
-<div id="thank-you-for-visiting" class="section level2">
-<h2>Thank you for visiting!</h2>
-<p><img src="images/biking.jpeg" style="width:75%"></p>
+<div id="column-1" class="section level2" data-width="350">
+<h2>Column</h2>
+<div id="chart-b" class="section level3">
+<h3>Chart B</h3>
+</div>
+<div id="chart-c" class="section level3">
+<h3>Chart C</h3>
+</div>
 </div>
 
 
 
-</div>
-</div>
 
 </div>
 
@@ -444,32 +406,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

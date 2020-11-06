@@ -1,0 +1,54 @@
+---
+title: "Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    source: embed
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+library(flexdashboard)
+library(rvest)
+library(httr)
+```
+
+```{r}
+api_url = "https://data.cityofnewyork.us/resource/43nn-pn8j.csv"
+
+rest_inspections = 
+  GET(api_url, query = list("$limit" = 50000)) %>% 
+  content("parsed")
+
+rest_inspections
+
+```
+
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+```
+
+### Chart C
+
+```{r}
+
+```
+
