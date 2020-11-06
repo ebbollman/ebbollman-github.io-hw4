@@ -5,6 +5,7 @@ output:
     orientation: columns
     vertical_layout: fill
     source: embed
+    code_folding: show
 ---
 
 ```{r setup, include=FALSE}
@@ -23,8 +24,9 @@ rest_inspections =
   GET(api_url, query = list("$limit" = 50000)) %>% 
   content("parsed")
 
-rest_inspections
-
+rest_inspections_df = 
+  rest_inspections %>% 
+  filter(grade %in% c("A", "B", "C"), boro != "0")
 ```
 
 
@@ -34,7 +36,15 @@ Column {data-width=650}
 ### Chart A
 
 ```{r}
+plot_1 =
+  rest_inspections_df %>%
+  mutate(text_label = 
+           str_c("Grade: ", grade, "\nCuisine: ", cuisine_description, "\nBoro ", boro)) %>% 
+  plot_ly(
+          x = ~longitude, y = ~latitude, color = ~grade,  text = ~text_label, 
+          type = "scatter", mode = "markers", colors = "viridis", alpha = 0.3)
 
+layout(plot_1, xaxis = list(range = c(-73.65, -74.25)), yaxis = list(range = c(40.5, 40.93)))
 ```
 
 Column {data-width=350}
