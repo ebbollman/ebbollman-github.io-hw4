@@ -68,6 +68,16 @@ layout(plot_2, xaxis = list(title = "Boro & Grade"), yaxis = list(title = "Numbe
 ### Chart C
 
 ```{r}
+plot_3 = 
+  rest_inspections_df %>%
+  group_by(cuisine_description, boro) %>%
+  filter(cuisine_description != "American") %>% 
+  count(grade) %>% 
+  plot_ly(
+    x = ~cuisine_description, y = ~n, fillcolor = ~boro, text = ~grade,
+    type = "bar"
+  )
 
+layout(plot_3, xaxis = list(title = "Type of Cuisine"), yaxis = list(title = "Number with each grade"))
 ```
 
